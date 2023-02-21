@@ -4,4 +4,4 @@
 ![Screenshot](https://raw.githubusercontent.com/ChiesiMario/share-music-player/main/Screenshot.png)
 
 # 使用
-部署網頁後：`http://[服務器地址]/?name=[歌曲名]&artist=[歌手]&cover=[封面 URL]&link=[歌曲直鏈]`
+部署網頁後：`http://[服務器地址]/?name=[歌曲名]&artist=[歌手]&cover=[封面直鏈]&link=[歌曲直鏈]`
