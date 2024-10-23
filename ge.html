@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐链接生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .output {
+            margin-top: 20px;
+        }
+
+        .output a {
+            color: #0066cc;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2>音乐链接生成器</h2>
+
+<form id="musicForm">
+    <label for="songName">歌曲名:</label>
+    <input type="text" id="songName" placeholder="请输入歌曲名" required>
+
+    <label for="artistName">歌手名:</label>
+    <input type="text" id="artistName" placeholder="请输入歌手名" required>
+
+    <label for="coverUrl">封面地址:</label>
+    <input type="url" id="coverUrl" placeholder="请输入封面图片URL" required>
+
+    <label for="songUrl">歌曲mp3链接:</label>
+    <input type="url" id="songUrl" placeholder="请输入歌曲mp3文件URL" required>
+
+    <button type="button" onclick="generateUrl()">生成链接</button>
+</form>
+
+<div class="output" id="output"></div>
+
+<script>
+    function generateUrl() {
+        const songName = encodeURIComponent(document.getElementById('songName').value);
+        const artistName = encodeURIComponent(document.getElementById('artistName').value);
+        const coverUrl = encodeURIComponent(document.getElementById('coverUrl').value);
+        const songUrl = encodeURIComponent(document.getElementById('songUrl').value);
+
+        const baseUrl = 'https://music.cubeblue.info/';
+        const queryParams = `?name=${songName}&artist=${artistName}&cover=${coverUrl}&link=${songUrl}`;
+        const fullUrl = baseUrl + queryParams;
+
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = `
+            <p>生成的URL:</p>
+            <a href="${fullUrl}" target="_blank">${fullUrl}</a>
+            <button class="copy-btn" onclick="copyToClipboard('${fullUrl}')">复制到剪贴板</button>
+        `;
+    }
+
+    function copyToClipboard(text) {
+        const tempInput = document.createElement('input');
+        document.body.appendChild(tempInput);
+        tempInput.value = text;
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        alert('URL已复制到剪贴板');
+    }
+</script>
+
+</body>
+</html>
