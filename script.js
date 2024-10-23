@@ -57,6 +57,7 @@ function loadSong(song) {
   artist.textContent = song.artist;
   music.src = `${song.mp3link}`;
   image.src = `${song.cover}`;
+  document.title = `${song.displayName} - ${song.artist}`;
 }
 // current song update DOM
 let songIndex = 0;
